@@ -16,6 +16,7 @@ import {
 } from 'react-icons/hi'
 import MobileHeaderIcon from './MobileHeaderIcon'
 import { gsap, Power3 } from 'gsap'
+import AuthButton from './AuthButton'
 
 function Header() {
   const navigationRef = useRef(null)
@@ -29,7 +30,7 @@ function Header() {
       ease: Power3.easeOut,
     })
     gsap.to(mobileNavRef.current, {
-      zIndex: 999,
+      display: 'flex',
     })
     gsap.to(navOpacityRef.current, {
       opacity: 0.3,
@@ -44,7 +45,7 @@ function Header() {
       ease: Power3.easeOut,
     })
     gsap.to(mobileNavRef.current, {
-      zIndex: -40,
+      display: 'none',
     })
     gsap.to(navOpacityRef.current, {
       opacity: 0,
@@ -94,23 +95,31 @@ function Header() {
         <HiOutlinePlus title="Create Post" className="icon" />
         <HiOutlineSpeakerphone title="Advertise" className="icon" />
       </div>
+
+      {/* Bugger */}
       <div className="ml-5 text-gray-500 md:hidden">
         <HiMenu onClick={openNavbar} className="icon" />
       </div>
 
+      {/* Sign in/Sign out button */}
+      <AuthButton />
+
       {/* Mobil Navbar */}
       <div
         ref={mobileNavRef}
-        className="absolute top-0 left-0 -z-10 flex h-screen w-full flex-row-reverse overflow-hidden"
+        className="absolute top-0 left-0 z-50 hidden h-screen w-full flex-row-reverse overflow-hidden"
       >
         <div
           ref={navigationRef}
-          className="relative w-[250px] translate-x-full bg-white pt-14 pl-5"
+          className="w-[250px] translate-x-full bg-white pt-5 pl-5"
         >
-          <HiOutlineX
-            onClick={closeNavbar}
-            className="absolute top-3 left-3 h-8 w-8 cursor-pointer transition-transform active:scale-125"
-          />
+          <div className="mb-5 flex items-center justify-between pr-5">
+            <HiOutlineX
+              onClick={closeNavbar}
+              className="h-8 w-8 cursor-pointer transition-transform active:scale-125"
+            />
+            <AuthButton mobile />
+          </div>
           <MobileHeaderIcon Icon={HiHome} text="Home" active />
           <MobileHeaderIcon Icon={HiOutlineSparkles} text="Popular" />
           <MobileHeaderIcon Icon={HiOutlineGlobe} text="All" />
