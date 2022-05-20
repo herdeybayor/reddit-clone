@@ -54,14 +54,13 @@ function Header() {
   }
 
   return (
-    <div className="sticky top-0 z-50 flex items-center bg-white px-4 py-2 shadow-sm">
+    <div className="sticky top-0 z-30 flex items-center bg-white px-4 py-2 shadow-sm">
       <div className="relative h-10 w-20 flex-shrink-0 cursor-pointer">
         <Image
           src="https://links.papareact.com/fqy"
           layout="fill"
           alt="reddit logo"
           objectFit="contain"
-          priority
         />
       </div>
 
