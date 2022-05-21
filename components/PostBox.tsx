@@ -8,12 +8,14 @@ import { FormData } from '../typings'
 import { useMutation } from '@apollo/client'
 import { ADD_POST, ADD_SUBREDDIT } from '../graphql/mutations'
 import client from '../apollo-client'
-import { GET_SUBREDDIT_BY_TOPIC } from '../graphql/queries'
+import { GET_ALL_POST, GET_SUBREDDIT_BY_TOPIC } from '../graphql/queries'
 import toast from 'react-hot-toast'
 
 function PostBox() {
   const { data: session } = useSession()
-  const [addPost] = useMutation(ADD_POST)
+  const [addPost] = useMutation(ADD_POST, {
+    refetchQueries: [GET_ALL_POST, 'getPostList'],
+  })
   const [addSubreddit] = useMutation(ADD_SUBREDDIT)
   const {
     register,
@@ -103,6 +105,7 @@ function PostBox() {
       setValue('postImage', '')
       setValue('postTitle', '')
       setValue('subreddit', '')
+      setIsImageBoxOpen(false)
     }
   })
 
@@ -113,7 +116,8 @@ function PostBox() {
     >
       <div className="flex items-center space-x-3">
         <Avatar />
-
+        {/* DO NOT REMOVE THE BELOW DIV COMMENT <<tailwindcss not adding .w-10 class to <Avatar /> */}
+        {/* <div className="h-10 w-10 bg-red-500"></div> */}
         <input
           {...register('postTitle', { required: true })}
           className="flex-1 rounded-md bg-gray-50 p-2 pl-5 outline-none"

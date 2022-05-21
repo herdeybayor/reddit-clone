@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import { getSession } from 'next-auth/react'
 import Head from 'next/head'
+import Feed from '../components/Feed'
 import PostBox from '../components/PostBox'
 
 const Home: NextPage = () => {
@@ -13,7 +14,9 @@ const Home: NextPage = () => {
 
       <PostBox />
 
-      <div className="flex">{/* Feed */}</div>
+      <div className="flex">
+        <Feed />
+      </div>
     </div>
   )
 }
