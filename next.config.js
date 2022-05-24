@@ -2,6 +2,11 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['links.papareact.com', 'avatars.dicebear.com'],
+    domains: [
+      'links.papareact.com',
+      'avatars.dicebear.com',
+      'localhost',
+      'reddit-clone-herdeybayor.vercel.app',
+    ],
   },
 }
