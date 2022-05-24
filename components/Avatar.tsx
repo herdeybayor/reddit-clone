@@ -11,7 +11,7 @@ function Avatar({ seed, large }: Props) {
   const { data: session } = useSession()
   return (
     <div
-      className={`relative overflow-hidden rounded-full border-gray-300 bg-white ${
+      className={`relative flex-shrink-0 overflow-hidden rounded-full border-gray-300 bg-white ${
         large ? 'h-20 w-20' : 'h-10 w-10'
       }`}
     >
@@ -20,6 +20,7 @@ function Avatar({ seed, large }: Props) {
           seed || session?.user?.name || 'placeholder'
         }/.svg`}
         layout="fill"
+        alt="avatar"
       />
     </div>
   )

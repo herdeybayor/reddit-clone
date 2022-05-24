@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSession } from 'next-auth/react'
-import Avatar from '../Avatar'
+import Avatar from './Avatar'
 import { HiOutlineLink, HiOutlinePhotograph } from 'react-icons/hi'
 import { useForm } from 'react-hook-form'
 import FormInput from './FormInput'
@@ -11,7 +11,11 @@ import client from '../apollo-client'
 import { GET_ALL_POST, GET_SUBREDDIT_BY_TOPIC } from '../graphql/queries'
 import toast from 'react-hot-toast'
 
-function PostBox() {
+type Props = {
+  subreddit?: string
+}
+
+function PostBox({ subreddit }: Props) {
   const { data: session } = useSession()
   const [addPost] = useMutation(ADD_POST, {
     refetchQueries: [GET_ALL_POST, 'getPostList'],
@@ -38,7 +42,7 @@ function PostBox() {
         fetchPolicy: 'no-cache',
         query: GET_SUBREDDIT_BY_TOPIC,
         variables: {
-          topic: formData.subreddit,
+          topic: subreddit || formData.subreddit,
         },
       })
 
@@ -112,29 +116,31 @@ function PostBox() {
   return (
     <form
       onSubmit={onSubmit}
-      className="sticky top-16 z-20 rounded-md border border-gray-300 bg-white p-2"
+      className="sticky top-16 z-20 rounded-md border border-gray-300 bg-white p-2 lg:top-20"
     >
-      <div className="flex items-center space-x-3">
+      <div className="flex items-center space-x-2">
         <Avatar />
-        {/* DO NOT REMOVE THE BELOW DIV COMMENT <<tailwindcss not adding .w-10 class to <Avatar /> */}
-        {/* <div className="h-10 w-10 bg-red-500"></div> */}
         <input
           {...register('postTitle', { required: true })}
-          className="flex-1 rounded-md bg-gray-50 p-2 pl-5 outline-none"
+          className="w-full flex-1 rounded-md bg-gray-50 p-2 outline-none placeholder:text-xs sm:placeholder:text-base"
           type="text"
           placeholder={
-            session ? 'Create a post by entering a title!' : 'Sign in to post'
+            session
+              ? subreddit
+                ? `Create a post in r/${subreddit}`
+                : 'Create a post by entering a title!'
+              : 'Sign in to post'
           }
           disabled={!session}
         />
 
         <HiOutlinePhotograph
           onClick={() => setIsImageBoxOpen((prev) => !prev)}
-          className={`h-6 w-6 cursor-pointer ${
+          className={`h-4 w-4 flex-shrink-0 cursor-pointer sm:h-6 sm:w-6 ${
             !isImageBoxOpen ? 'text-gray-300' : 'text-blue-300'
           }`}
         />
-        <HiOutlineLink className="h-6 w-6 cursor-pointer text-gray-300" />
+        <HiOutlineLink className="h-4 w-4 flex-shrink-0 cursor-pointer text-gray-300 sm:h-6 sm:w-6" />
       </div>
 
       {!!watch('postTitle') && (
@@ -147,13 +153,15 @@ function PostBox() {
             register={register}
           />
 
-          <FormInput
-            label="Subreddit"
-            placeholder="i.e reactjs"
-            name="subreddit"
-            register={register}
-            required
-          />
+          {!subreddit && (
+            <FormInput
+              label="Subreddit"
+              placeholder="i.e reactjs"
+              name="subreddit"
+              register={register}
+              required
+            />
+          )}
 
           {isImageBoxOpen && (
             <FormInput

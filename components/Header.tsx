@@ -17,6 +17,8 @@ import {
 import MobileHeaderIcon from './MobileHeaderIcon'
 import { gsap, Power3 } from 'gsap'
 import AuthButton from './AuthButton'
+import Link from 'next/link'
+import LinkWrapper from './LinkWrapper'
 
 function Header() {
   const navigationRef = useRef(null)
@@ -55,25 +57,29 @@ function Header() {
 
   return (
     <div className="sticky top-0 z-30 flex items-center bg-white px-4 py-2 shadow-sm">
-      <div className="relative h-10 w-20 flex-shrink-0 cursor-pointer">
-        <Image
-          src="https://links.papareact.com/fqy"
-          layout="fill"
-          alt="reddit logo"
-          objectFit="contain"
-        />
-      </div>
+      <Link href="/">
+        <div className="relative h-10 w-20 flex-shrink-0 cursor-pointer">
+          <Image
+            src="https://links.papareact.com/fqy"
+            layout="fill"
+            alt="reddit logo"
+            objectFit="contain"
+          />
+        </div>
+      </Link>
 
-      <div className="mx-7 flex items-center xl:min-w-[300px]">
-        <HiHome title="Home" className="h-5 w-5 cursor-pointer" />
-        <p className="ml-2 hidden flex-1 lg:inline">Home</p>
+      <div className="mx-7 flex flex-1 items-center justify-between">
+        <>
+          <HiHome title="Home" className="h-5 w-5 cursor-pointer" />
+          <p className="ml-2 hidden flex-1 lg:inline">Home</p>
+        </>
         <HiChevronDown title="More" className="h-5 w-5 cursor-pointer" />
       </div>
 
       {/* Search box */}
       <form
         title="Search"
-        className="flex flex-1 items-center space-x-2 rounded-sm border border-gray-200 bg-gray-100 px-3 py-2"
+        className="hidden flex-1 items-center space-x-2 rounded-sm border border-gray-200 bg-gray-100 px-3 py-2 sm:flex"
       >
         <HiSearch className="h-6 w-6 text-gray-400" />
         <input
@@ -110,7 +116,7 @@ function Header() {
       >
         <div
           ref={navigationRef}
-          className="w-[250px] translate-x-full bg-white pt-5 pl-5"
+          className="max-h-screen w-[250px] translate-x-full overflow-x-scroll bg-white pt-5 pl-5"
         >
           <div className="mb-5 flex items-center justify-between pr-5">
             <HiOutlineX
