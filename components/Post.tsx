@@ -58,7 +58,9 @@ function Post({ post }: Props) {
           {post.image && (
             <div className="relative aspect-video w-full">
               <Image
-                src={`/api/imageproxy?url=${encodeURIComponent(post.image)}`}
+                src={`${
+                  process.env.NEXT_PUBLIC_BASE_URL
+                }/api/imageproxy?url=${encodeURIComponent(post.image)}`}
                 layout="fill"
                 objectFit="contain"
                 alt="post image"
