@@ -21,7 +21,7 @@ interface Props {
 function Post({ post }: Props) {
   if (!post)
     return (
-      <div>
+      <div className="flex w-full items-center justify-center p-10 text-xl">
         <Jelly size={50} speed={0.9} color="#ff4501" />
       </div>
     )
