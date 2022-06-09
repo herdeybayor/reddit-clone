@@ -30,7 +30,7 @@ function Feed({ topic }: Props) {
         </div>
       )}
       {posts?.map((post) => (
-        <Post key={post.id} post={post} />
+        <Post truncate key={post.id} post={post} />
       ))}
     </div>
   )

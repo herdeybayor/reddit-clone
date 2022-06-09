@@ -21,9 +21,10 @@ import { ADD_VOTE } from '../graphql/mutations'
 
 interface Props {
   post: Post
+  truncate?: boolean
 }
 
-function Post({ post }: Props) {
+function Post({ post, truncate }: Props) {
   const [vote, setVote] = useState<boolean>()
   const { data: session } = useSession()
 
@@ -127,7 +128,9 @@ function Post({ post }: Props) {
           {/* Body */}
           <div className="py-4">
             <h2 className="text-xl font-semibold">{post.title}</h2>
-            <p className="mt-2 text-sm font-light">{post.body}</p>
+            <p className="mt-2 text-sm font-light">
+              {truncate ? `${post.body.slice(0, 100)}...` : post.body}
+            </p>
           </div>
           {/* Image */}
           {post.image && (
