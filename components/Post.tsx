@@ -27,7 +27,7 @@ function Post({ post }: Props) {
     )
   return (
     <Link href={`/post/${post.id}`}>
-      <div className="flex cursor-pointer rounded-md border border-gray-300 bg-white shadow-sm hover:border hover:border-gray-600">
+      <div className="flex cursor-pointer rounded-md border border-gray-300 bg-white shadow-sm hover:border group-hover:border-gray-600">
         {/* Votes */}
         <div className="flex flex-col items-center justify-start space-y-1 rounded-l-md bg-gray-50 px-1 py-4 text-gray-400 sm:p-4">
           <HiOutlineArrowUp className="voteButtons hover:text-red-400" />
@@ -35,7 +35,7 @@ function Post({ post }: Props) {
           <HiOutlineArrowDown className="voteButtons hover:text-blue-400" />
         </div>
 
-        <div className="p-3 pb-1">
+        <div className="w-full p-3 pb-1">
           {/* Header */}
           <div className="flex items-center space-x-2">
             <Avatar seed={post.subreddit[0]?.topic} />
