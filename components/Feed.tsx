@@ -22,7 +22,7 @@ function Feed({ topic }: Props) {
     : data?.getPostListByTopic
 
   return (
-    <div className="mt-5 space-y-4">
+    <div className="mt-5 flex-1 space-y-4">
       {posts?.map((post) => (
         <Post key={post.id} post={post} />
       ))}

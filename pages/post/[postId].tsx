@@ -10,6 +10,7 @@ import { ADD_COMMENT } from '../../graphql/mutations'
 import { Post as PostType } from '../../typings'
 import Avatar from '../../components/Avatar'
 import ReactTimeago from 'react-timeago'
+import Head from 'next/head'
 
 type FormData = {
   comment: string
@@ -67,6 +68,14 @@ function PostPage() {
 
   return (
     <div className="my-7 mx-auto max-w-5xl px-5">
+      <Head>
+        <title>
+          {!post
+            ? 'loading...'
+            : `r/${post?.subreddit[0]?.topic} || ${post?.title}`}
+        </title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="group">
         <Post post={post} />
         {!loading && (
