@@ -7,6 +7,8 @@ module.exports = {
       'avatars.dicebear.com',
       'localhost',
       'reddit-clone-herdeybayor.vercel.app',
+      "redditinc.com",
+      "www.redditinc.com",
     ],
   },
 }
