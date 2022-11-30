@@ -60,7 +60,7 @@ function Header() {
       <Link href="/">
         <div className="relative h-10 w-20 flex-shrink-0 cursor-pointer">
           <Image
-            src="https://links.papareact.com/fqy"
+            src="https://www.redditinc.com/assets/images/site/reddit-logo.png"
             layout="fill"
             alt="reddit logo"
             objectFit="contain"
